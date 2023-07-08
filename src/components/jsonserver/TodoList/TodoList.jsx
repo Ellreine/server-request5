@@ -13,11 +13,15 @@ const TodoList = ({ todos, requestDeleteTodo, isDeleting, isUpdating, requestUpd
 		setEdit(id)
 		setValue(title)
 	}
+
+	Object.entries(todos).map(([key, { id, title, completed }]) => {
+		console.log(key, id, title, completed)
+	})
 	return (
 		<div>
-			{todos.map(({ id, title, completed }) => (
+			{Object.entries(todos).map(([key, { id, title, completed }]) => (
 				<div key={id} className={s.listItems}>
-					{edit === id ? (
+					{edit == id ? (
 						<Row>
 							<Col className={s.AddTodoForm}>
 								<FormControl onChange={e => setValue(e.target.value)} value={value} />

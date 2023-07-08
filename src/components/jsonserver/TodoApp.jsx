@@ -13,7 +13,7 @@ function TodoApp() {
 	const [refreshTodosFlag, setRefreshTodosFlag] = useState(false)
 	const refreshTodos = () => setRefreshTodosFlag(!refreshTodosFlag)
 
-	const { isLoading, todos } = useRequestGetTodos(refreshTodosFlag)
+	const { isLoading, todos } = useRequestGetTodos()
 	const { isCreating, requestAddTodo } = useRequestAddTodo(refreshTodos)
 	const { isDeleting, requestDeleteTodo } = useRequestDeleteTodo(refreshTodos)
 	const { isUpdating, requestUpdateTodo } = useRequestUpdateTodo(refreshTodos)
