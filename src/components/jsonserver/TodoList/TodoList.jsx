@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Row, Col, Button, FormControl } from 'react-bootstrap'
 import s from './TodoList.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -14,17 +13,27 @@ const TodoList = ({ todos, requestDeleteTodo, isDeleting, isUpdating, requestUpd
 		setValue(title)
 	}
 
-	Object.entries(todos).map(([key, { id, title, completed }]) => {
-		console.log(key, id, title, completed)
-	})
+	useEffect(() => {
+		if (isUpdating) {
+			setEdit(null)
+			setValue(null)
+		}
+	}, [isUpdating])
+
+	// const update = (id, completed, value) => {
+	// 	requestUpdateTodo(id, completed, value)
+	// 	setEdit(null)
+	// 	setValue(null)
+	// }
+
 	return (
 		<div>
-			{Object.entries(todos).map(([key, { id, title, completed }]) => (
+			{todos.map(({ id, title, completed }) => (
 				<div key={id} className={s.listItems}>
-					{edit == id ? (
+					{edit === id ? (
 						<Row>
 							<Col className={s.AddTodoForm}>
-								<FormControl onChange={e => setValue(e.target.value)} value={value} />
+								<FormControl disabled={isUpdating} onChange={e => setValue(e.target.value)} value={value} />
 							</Col>
 						</Row>
 					) : (
@@ -33,7 +42,7 @@ const TodoList = ({ todos, requestDeleteTodo, isDeleting, isUpdating, requestUpd
 						</div>
 					)}
 
-					{edit == id ? (
+					{edit === id ? (
 						<div>
 							<Button onClick={() => requestUpdateTodo(id, completed, value)} size='sm'>
 								<FontAwesomeIcon icon={faSave} />

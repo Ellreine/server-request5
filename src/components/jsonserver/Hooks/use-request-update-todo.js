@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { ref, update } from 'firebase/database'
 import { db } from '../../../firebase'
 
-export const useRequestUpdateTodo = () => {
+export const useRequestUpdateTodo = refreshTodos => {
 	const [isUpdating, setIsUpdating] = useState(false)
 
 	const requestUpdateTodo = (id, completed, title) => {
@@ -25,7 +25,7 @@ export const useRequestUpdateTodo = () => {
 			// 	.then(rawResponse => rawResponse.json())
 			.then(response => {
 				console.log('Задача обновлена, ответ сервера:', response)
-				// refreshTodos()
+				refreshTodos()
 			})
 			.finally(() => setIsUpdating(false))
 	}

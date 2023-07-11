@@ -26,7 +26,7 @@ function TodoApp() {
 	const handleSortOrderChange = order => {
 		setSortOrder(order)
 	}
-
+	console.log('todoApp', todos)
 	return (
 		<Container>
 			<Header />
@@ -41,6 +41,7 @@ function TodoApp() {
 			) : (
 				<TodoList
 					// todos={sortedTodos}
+					refreshTodosFlag={refreshTodosFlag}
 					todos={debouncedSortAndFilteredTodos}
 					requestDeleteTodo={requestDeleteTodo}
 					isDeleting={isDeleting}

@@ -11,8 +11,7 @@ export const useRequestAddTodo = refreshTodos => {
 		const todosDbRef = ref(db, 'todos')
 		push(todosDbRef, {
 			completed: false,
-			title: valueInput,
-			id: Date.now()
+			title: valueInput
 		})
 			// fetch('http://localhost:3004/todos/', {
 			// 	method: 'POST',

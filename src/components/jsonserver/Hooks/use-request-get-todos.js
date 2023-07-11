@@ -12,9 +12,15 @@ export const useRequestGetTodos = () => {
 		return onValue(todosDbRef, snapshot => {
 			const loadedTodos = snapshot.val() || []
 
-			console.log('321312', loadedTodos)
-			console.log('321312', Object.values(loadedTodos))
-			setTodos(Object.values(loadedTodos))
+			console.log('loadedTodos', loadedTodos)
+			console.log('Object', Object.values(loadedTodos))
+
+			const arrayData = []
+			for (const key in loadedTodos) {
+				arrayData.push({ ...loadedTodos[key], id: key })
+			}
+
+			setTodos(arrayData)
 			setIsLoading(false)
 		})
 	}, [])
